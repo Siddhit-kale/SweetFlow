@@ -1,0 +1,49 @@
+// Prisma schema for SweetFlow - Smart Sweet Shop Management System
+// This schema defines the database models for users and sweets
+// Using MongoDB as the database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Seed script configuration
+// Run with: npm run prisma:seed
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication
+// Supports two roles: USER (customer) and ADMIN (shop manager)
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String   // Hashed password using bcrypt
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// Sweet model for inventory management
+// Each sweet has name, category, price, and quantity
+model Sweet {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  category  String
+  price     Float
+  quantity  Int      @default(0) // Available quantity in stock
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sweets")
+}
+
+// Enum for user roles
+enum Role {
+  USER
+  ADMIN
+}
+
