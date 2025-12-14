@@ -37,11 +37,6 @@ npm run dev
 - Purchase functionality
 - Admin dashboard
 
-## 🔐 Default Admin
-
-- Email: `admin@sweetflow.com`
-- Password: `admin123`
-
 ## 🛠️ Tech Stack
 
 - **Backend**: NestJS + TypeScript + MongoDB + Prisma
